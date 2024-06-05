@@ -74,10 +74,9 @@ body {
 
 /* Header et ses enfants */
 header {
-	box-shadow: 0 0 10px rgb(139, 139, 139);
+	box-shadow: 0 0 10px rgb(196, 195, 195);
 	display: block;
 	height: 7rem;
-	width: 100vw;
 	padding: 4rem;
 	margin: 0px;
 	position: fixed;
@@ -86,6 +85,8 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	font-weight: bold;
+	position: relative;
+	margin-bottom: 2rem;
 }
 
 .logo-header {
@@ -107,30 +108,65 @@ header a {
 	font-size: 1.3rem;
 }
 
-.searchbar-button{
-		width: 2.5rem; 
-		height: 2.5rem; 
-		background-color: var(--main-color);
-		background-image: url('images/search-icon.svg');
-		background-size: 1.8rem; 
-		background-repeat: no-repeat; 
-		background-position: center; 
-		cursor: pointer;
-		border-radius: 2rem;
-		border: solid 1px var(--main-color);
+.searchbar-total {
+	display: flex;
+	align-items: center;
+
 }
 
-.searchbar-button:hover svg {
-	background-color: white;
-	fill: var(--main-color)
-}
-
-.searchbar{
-	padding: 10px;
-	height: 2rem;
+.searchbar-button {
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: var(--main-color);
+	background-image: url('images/search-icon.svg');
+	background-size: 1.8rem;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
 	border-radius: 2rem;
+	border: solid 3px var(--main-color);
+	transition: 0.3s;
+	margin-right: 5px;
 }
 
-.searchbar:focus {
+.searchbar-button:hover {
+	background-color: white;
+	background-image: url('images/search-icon-red.svg');
+	transition: 0.3s;
+}
+
+#searchbar {
+	width: 0px;
+	transition: 0.4s;
+	border: none;
+}
+
+#searchbar:focus {
 	border: solid 5px var(--main-color);
+	padding: 10px;
+	height: 2.2rem;
+	width: 15rem;
+	border-radius: 2rem;
+	transition: 0.4s;
+}
+
+
+/* Footer et ses enfants */
+footer {
+	background-color: rgb(240, 240, 240);
+	color: white;
+	padding: 1rem;
+	border-top: solid 5px var(--main-color);
+	margin-top: 2rem;
+}
+
+footer a{
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 2rem;
+	font-size: 0.8rem;
+}
+
+main div{
+	width: 50%;
 }
