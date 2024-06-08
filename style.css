@@ -69,12 +69,13 @@ body {
 	margin: 0px;
 	background-color: #ffffff;
 	font-family: 'Marianne';
+	min-width: 768px;
 }
 
 
 /* Header et ses enfants */
 header {
-	box-shadow: 0 0 10px rgb(196, 195, 195);
+	box-shadow: 0 0 10px rgb(158, 158, 158);
 	display: block;
 	height: 7rem;
 	padding: 4rem;
@@ -154,7 +155,6 @@ header a {
 /* Footer et ses enfants */
 footer {
 	background-color: rgb(240, 240, 240);
-	color: white;
 	padding: 1rem;
 	border-top: solid 5px var(--main-color);
 	margin-top: 2rem;
@@ -165,8 +165,24 @@ footer a{
 	justify-content: flex-end;
 	margin-right: 2rem;
 	font-size: 0.8rem;
+	color: black;
 }
 
-main div{
-	width: 50%;
+.basPage {
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 60;
+}
+
+.invis {
+    height: 4em;
+    margin: 0;
+}
+
+.vis {
+    height: 37em;
+}
+
+main img{
+	border: solid 5px var(--main-color);
 }
