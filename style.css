@@ -160,7 +160,7 @@ footer {
 	margin-top: 2rem;
 }
 
-footer a{
+.totop {
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 2rem;
@@ -169,20 +169,16 @@ footer a{
 }
 
 .basPage {
-    overflow: hidden;
-    cursor: pointer;
-    z-index: 60;
+	overflow: hidden;
+	cursor: pointer;
+	z-index: 60;
 }
 
 .invis {
-    height: 4em;
-    margin: 0;
+	height: 4em;
+	margin: 0;
 }
 
 .vis {
-    height: 37em;
-}
-
-main img{
-	border: solid 5px var(--main-color);
+	height: 37em;
 }

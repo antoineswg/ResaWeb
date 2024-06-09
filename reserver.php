@@ -11,6 +11,13 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
+<?php
+include("connexion.php");
+$requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
+$stmt = $db->query($requete);
+$resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
+?>
+
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header name="top">
@@ -29,21 +36,28 @@
         </div>
     </header>
     <main>
-        <h1>Où réserver ?</h1>
-        <div>
-            <img src="img/cafetiut.png" alt=""> <a href="lieu.php?id=1">Cafétéria de l'IUT</a>
-        </div>
-        <div>
-            <img src="img/cafetlavoisier.png" alt=""> <a href="lieu.php?id=2">Cafétéria du bâtiment Lavoisier</a>
-        </div>
-        <div>
-            <img src="img/cantinecopernic.png" alt=""> <a href="lieu.php?id=4">Cantine du bâtiment Copernic</a>
-        </div>
-        <div>
-            <img src="img/cantineesiee.png" alt=""> <a href="lieu.php?id=3">Cantine de l'ESIEE</a>
-        </div>
+    <label for="prenom" >Prénom*</label> 
+    <input type="text" name="premon" placeholder="Richard" id="prenom" maxlength="40" required>
+<br>
+    <label for="nom" >Nom*</label>
+    <input type="text" name="nom" placeholder="Flantier" id="nom" maxlength="40" required>
+<br>
+    <label for="email" >E-mail*</label>
+    <input type="email" name="email" placeholder="richard.flantier@mail.fr" id="email" maxlength="100" required>
+<br>
+    <label for="nombreplaces">Pour combien de personnes réservez-vous ?*</label>
+    <select name="nombreplaces" id="nombreplaces">
+    <option value="un">1</option>
+    <option value="deux">2</option>
+    <option value="trois">3</option>
+    <option value="quatre">4</option>
+    <option value="cinq">5</option>
+</select>
+<br>
+    <p hidden id="prix"><?php foreach ($resultat as $lieu) echo "{$lieu["prix"]}" ?></p>
+    <p>Prix à payer TTC :  <span id="prixtotal"></span></p>
     </main>
-
+    
     <footer>
         <a href="#top" class="totop">RETOUR EN HAUT ↑</a>
         <div class="basPage invis">
@@ -56,10 +70,9 @@
                 webmaster@univ-eiffel.fr
             </p>
             <h3>Traitement des données à caractère personnel :</h3>
-            <p>Le formulaire utilisé pour faire une réservation collecte votre adresse email indiquée. Ces données ne
-                seront en aucun cas partagées ou commercialisées.
+            <p>Le formulaire utilisé pour faire une réservation collecte votre adresse email indiquée. Ces données ne seront en aucun cas partagées ou commercialisées.
                 <br>Toute question relative à la récupération et conservation de vos données se doit d'être adressée à
-                <a href="mailt:antoine.montoya@edu.univ-eiffel.fr">Antoine Montoya</a>.
+                Philippe Gambette (philippe.gambette@univ-eiffel.fr).
             </p>
         </div>
     </footer>
