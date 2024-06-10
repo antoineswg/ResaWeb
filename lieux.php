@@ -22,7 +22,7 @@
                 </label>
                 <input type="text" id="searchbar" placeholder="Rechercher...">
             </div>
-            <a href="lieux.html">Catalogue</a>
+            <a href="lieux.php">Catalogue</a>
             <a href="page.php">Page2</a>
             <a href="page.php">Page3</a>
             <a href="page.php">Page4</a>
@@ -30,18 +30,31 @@
     </header>
     <main>
         <h1>Où réserver ?</h1>
-        <div>
-            <img src="img/cafetiut.png" alt=""> <a href="lieu.php?id=1">Cafétéria de l'IUT</a>
-        </div>
-        <div>
-            <img src="img/cafetlavoisier.png" alt=""> <a href="lieu.php?id=2">Cafétéria du bâtiment Lavoisier</a>
-        </div>
-        <div>
-            <img src="img/cantinecopernic.png" alt=""> <a href="lieu.php?id=4">Cantine du bâtiment Copernic</a>
-        </div>
-        <div>
-            <img src="img/cantineesiee.png" alt=""> <a href="lieu.php?id=3">Cantine de l'ESIEE</a>
-        </div>
+        <?php
+        include("connexion.php");
+        $requete = "SELECT * FROM lieu";
+        $stmt = $db->query($requete);
+        
+            $result = $stmt->fetchall(PDO::FETCH_ASSOC);
+                foreach ($result as $row){
+
+                    $id_lieu = $row['id_lieu'];
+                    $nom = $row['nom'];
+                    $image = $row['image'];
+                
+                    echo "<div>
+                                <img src='$image' alt=''> 
+                                <a href='lieu.php?id=$id_lieu'> $nom</a>
+                                </div>";
+        
+                }
+        
+                if (count($result) === 0) {
+                    echo "<div>
+                                <p>Aucun lieu trouvé</p>
+                            </div>";
+                }
+                ?>
     </main>
 
     <footer>

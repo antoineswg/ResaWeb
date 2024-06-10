@@ -29,7 +29,7 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 </label>
                 <input type="text" id="searchbar" placeholder="Rechercher...">
             </div>
-            <a href="lieux.html">Catalogue</a>
+            <a href="lieux.php">Catalogue</a>
             <a href="page.php">Page2</a>
             <a href="page.php">Page3</a>
             <a href="page.php">Page4</a>
