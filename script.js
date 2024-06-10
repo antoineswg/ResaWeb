@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  
   document.querySelector(".invis").addEventListener("click", function () {
     //Animer le volet pour le dérouler
     document.querySelector(".invis").animate(
@@ -34,34 +35,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 800);
   });
 
-  var nbplacesnombre;
-  function txttonumber() {
-    nbplacesnombre = nbplaces.value;
-    if (nbplacesnombre == "un") {
-      nbplacesnombre = 1;
-    }
-    if (nbplacesnombre == "deux") {
-      nbplacesnombre = 2;
-    }
-    if (nbplacesnombre == "trois") {
-      nbplacesnombre = 3;
-    }
-    if (nbplacesnombre == "quatre") {
-      nbplacesnombre = 4;
-    }
-    if (nbplacesnombre == "cinq") {
-      nbplacesnombre = 5;
-    }
-  }
-
+  
+// pour afficher dynamiquement le prix total en fonction du nombre de places
   var nbplaces = document.getElementById("nombreplaces");
   var prixtotal = document.getElementById("prixtotal");
   var prix = document.getElementById("prix");
-  txttonumber();
+  var nbplacesnombre = parseInt(nbplaces.value);
   prixtotal.innerHTML = nbplacesnombre * prix.innerHTML + "€";
-
   nbplaces.addEventListener("change", function () {
-    txttonumber();
+    var nbplacesnombre = parseInt(nbplaces.value);
     prixtotal.innerHTML = nbplacesnombre * prix.innerHTML + "€";
   });
 });

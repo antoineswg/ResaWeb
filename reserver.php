@@ -48,11 +48,11 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
 <br>
     <label for="nombreplaces">Pour combien de personnes réservez-vous ?*</label>
     <select name="nombreplaces" id="nombreplaces">
-    <option value="un">1</option>
-    <option value="deux">2</option>
-    <option value="trois">3</option>
-    <option value="quatre">4</option>
-    <option value="cinq">5</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
 </select><br>
 <input type="submit" value="Réserver">
 </form>
