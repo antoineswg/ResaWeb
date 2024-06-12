@@ -14,7 +14,7 @@
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header name="top">
-        <a href="index.html"><img class="logo-header" src="img/logo Krous.svg" alt="Accueil"></a>
+        <a href="index.php"><img class="logo-header" src="img/logo Krous.svg" alt="Accueil"></a>
         <div class="header-links">
 
             <div class="searchbar-total"> <label for="searchbar">
@@ -23,13 +23,14 @@
                 <input type="text" id="searchbar" placeholder="Rechercher...">
             </div>
             <a href="lieux.php">Catalogue</a>
-            <a href="page.php">Page2</a>
+            <a href="about.html">À propos</a>
             <a href="page.php">Page3</a>
             <a href="page.php">Page4</a>
         </div>
     </header>
-    <main>
+    <main id="contenu">
         <h1>Où réserver ?</h1>
+
         <?php
         include("connexion.php");
         $requete = "SELECT * FROM lieu";
@@ -55,6 +56,7 @@
                             </div>";
                 }
                 ?>
+
     </main>
 
     <footer>

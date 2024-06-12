@@ -11,13 +11,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
-<?php
-include("connexion.php");
-$requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
-$stmt = $db->query($requete);
-$resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-?>
-
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header name="top">
@@ -29,6 +22,7 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 </label>
                 <input type="text" id="searchbar" placeholder="Rechercher...">
             </div>
+
             <a href="lieux.php">Catalogue</a>
             <a href="about.html">À propos</a>
             <a href="page.php">Page3</a>
@@ -36,13 +30,9 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
         </div>
     </header>
     <main id="contenu">
-    <a href="reserver.php?id=<?php echo $_GET["id"] ?>">Cliquez ici pour réserver une place dans la queue.</a><br>
-<?php foreach ($resultat as $lieu) echo "{$lieu["prix"]}" ?> <br>
-<?php foreach ($resultat as $lieu) echo "{$lieu["desc"]}" ?> <br>
-<?php foreach ($resultat as $lieu) echo "{$lieu["nom"]}" ?> <br>
-<img src="<?php foreach ($resultat as $lieu) echo "{$lieu["image"]}" ?>" alt="">
+<h1>Où réserver ?</h1>
+
     </main>
-    
     <footer>
         <a href="#top" class="totop">RETOUR EN HAUT ↑</a>
         <div class="basPage invis">

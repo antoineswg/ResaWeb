@@ -21,7 +21,7 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header name="top">
-        <a href="index.html"><img class="logo-header" src="img/logo Krous.svg" alt="Accueil"></a>
+        <a href="index.php"><img class="logo-header" src="img/logo Krous.svg" alt="Accueil"></a>
         <div class="header-links">
 
             <div class="searchbar-total"> <label for="searchbar">
@@ -30,12 +30,12 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 <input type="text" id="searchbar" placeholder="Rechercher...">
             </div>
             <a href="lieux.php">Catalogue</a>
-            <a href="page.php">Page2</a>
+            <a href="about.html">À propos</a>
             <a href="page.php">Page3</a>
             <a href="page.php">Page4</a>
         </div>
     </header>
-    <main>
+    <main id="contenu">
     <form action="" method="get" class="form-reservation">
     <label for="prenom" >Prénom*</label> 
     <input type="text" name="premon" placeholder="Richard" id="prenom" maxlength="40" required>
@@ -54,6 +54,9 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
     <option value="4">4</option>
     <option value="5">5</option>
 </select><br>
+    <label for="date">Date de réservation*</label>
+    <input type="datetime-local" name="date" id="date" required>
+<br>
 <input type="submit" value="Réserver">
 </form>
 <p>Les symboles * indiquent un champ obligatoire</p>
@@ -61,6 +64,35 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
     <p hidden id="prix"><?php foreach ($resultat as $lieu) echo "{$lieu["prix"]}" ?></p>
     <p>Prix à payer TTC :  <span id="prixtotal"></span></p>
 
+    <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $email = $_POST['email'];
+    $nb_places = $_POST['nombreplaces'];
+    $date = $_POST['date'];
+    $prix = $_POST['prixtotal'];
+
+
+    // Préparer la requête SQL d'insertion
+    $requete = "INSERT INTO reservations (date, nom, prenom, mail, prix, nb_places) VALUES (:date, :nom, :prenom, :mail, :prix, :nb_places)";
+
+    // Exécuter la requête avec les données
+    try {
+        $stmt = $db->prepare($requete);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':nb_places', $nb_places);
+        $stmt->bindParam(':date', $date);
+
+        $stmt->execute();
+        echo "Réservation réussie !";
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+    }
+}
+?>
 
 
     </main>
