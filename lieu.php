@@ -7,46 +7,71 @@
     <title>Krous Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lieu.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
-
-<?php
-include("connexion.php");
-$requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
-$stmt = $db->query($requete);
-$resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-?>
-
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header name="top">
         <a href="index.php"><img class="logo-header" src="img/logo Krous.svg" alt="Accueil"></a>
         <div class="header-links">
-
-            <div class="searchbar-total"> <label for="searchbar">
-                    <div class="searchbar-button"></div>
-                </label>
-                <input type="text" id="searchbar" placeholder="Rechercher...">
-            </div>
-            <a href="lieux.php">Catalogue</a>
-            <a href="about.html">À propos</a>
-            <a href="page.php">Page3</a>
-            <a href="page.php">Page4</a>
+            <a class="header-link" href="recherche.php">Rechercher</a>
+            <a class="header-link" href="lieux.php">Catalogue</a>
+            <a class="header-link" href="about.html">À propos</a>
+            <a class="header-link" href="commentaires.php">Nos commentaires</a>
         </div>
     </header>
     <main id="contenu">
-    <a href="reserver.php?id=<?php echo $_GET["id"] ?>">Cliquez ici pour réserver une place dans la queue.</a><br>
-<?php foreach ($resultat as $lieu) echo "{$lieu["prix"]}" ?> <br>
-<?php foreach ($resultat as $lieu) echo "{$lieu["desc"]}" ?> <br>
-<?php foreach ($resultat as $lieu) echo "{$lieu["nom"]}" ?> <br>
-<img src="<?php foreach ($resultat as $lieu) echo "{$lieu["image"]}" ?>" alt="">
+    <?php
+include("connexion.php");
+
+if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
+    $id_lieu = intval($_GET["id"]);
+    
+    try {
+        $requete = "SELECT * FROM lieu WHERE id_lieu = :id_lieu";
+        $stmt = $db->prepare($requete);
+        $stmt->bindParam(':id_lieu', $id_lieu, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $nom = htmlspecialchars($result['nom']);
+            $desc = htmlspecialchars($result['desc']);
+            $prix = htmlspecialchars($result['prix']);
+            $image = htmlspecialchars($result['image']);
+
+            echo "<div class='card'>
+                    <img src='". $image ."' alt='Image de ". $nom ."'>
+                    <div class='card-text'>
+                        <h1>". $nom ."</h1>
+                        <p>". $desc ."</p>
+                        <p>Prix : ". $prix ."€</p>
+                        <a href='reserver.php?id=". $id_lieu ."'>Réserver</a>
+                    </div>
+                </div>";
+        } else {
+            header("Location:404.html");
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    } finally {
+        // Fermer la connexion à la base de données
+        $db = null;
+    }
+} else {
+    header("Location:404.html");
+}
+?>
     </main>
     
     <footer>
-        <a href="#top" class="totop">RETOUR EN HAUT ↑</a>
         <div class="basPage invis">
+            <div class="footer-header">            
             <h2 class="ML">Mentions légales</h2>
+            <a href="#top" class="totop">RETOUR EN HAUT ↑</a>   
+            </div>
             <p>Site réalisé par Antoine Montoya en 2024 dans le cadre d'un projet du BUT MMI à l'IUT de
                 Champs-sur-Marne encadré par les enseignants Gaëlle Charpentier, Philippe Gambette, Matthieu
                 Berthet et Renaud Eppstein.
@@ -58,6 +83,7 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 seront en aucun cas partagées ou commercialisées.
                 <br>Toute question relative à la récupération et conservation de vos données se doit d'être adressée à
                 <a href="mailto:antoine.montoya@edu.univ-eiffel.fr">Antoine Montoya</a>.
+                Pour la version détaillée des crédits : <a href="credits.html">Cliquez ici</a>
             </p>
         </div>
     </footer>

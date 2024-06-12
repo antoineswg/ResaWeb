@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".invis").animate(
       [
         {
-          height: "20em",
+          height: "25rem",
         },
       ],
       {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".vis").animate(
       [
         {
-          height: "4em",
+          height: "4rem",
         },
       ],
       {

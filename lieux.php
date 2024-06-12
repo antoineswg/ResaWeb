@@ -16,16 +16,10 @@
     <header name="top">
         <a href="index.php"><img class="logo-header" src="img/logo Krous.svg" alt="Accueil"></a>
         <div class="header-links">
-
-            <div class="searchbar-total"> <label for="searchbar">
-                    <div class="searchbar-button"></div>
-                </label>
-                <input type="text" id="searchbar" placeholder="Rechercher...">
-            </div>
-            <a href="lieux.php">Catalogue</a>
-            <a href="about.html">À propos</a>
-            <a href="page.php">Page3</a>
-            <a href="page.php">Page4</a>
+            <a class="header-link" href="recherche.php">Rechercher</a>
+            <a class="header-link" href="lieux.php">Catalogue</a>
+            <a class="header-link" href="about.html">À propos</a>
+            <a class="header-link" href="commentaires.php">Nos commentaires</a>
         </div>
     </header>
     <main id="contenu">
@@ -60,9 +54,11 @@
     </main>
 
     <footer>
-        <a href="#top" class="totop">RETOUR EN HAUT ↑</a>
         <div class="basPage invis">
+            <div class="footer-header">            
             <h2 class="ML">Mentions légales</h2>
+            <a href="#top" class="totop">RETOUR EN HAUT ↑</a>   
+            </div>
             <p>Site réalisé par Antoine Montoya en 2024 dans le cadre d'un projet du BUT MMI à l'IUT de
                 Champs-sur-Marne encadré par les enseignants Gaëlle Charpentier, Philippe Gambette, Matthieu
                 Berthet et Renaud Eppstein.
@@ -74,6 +70,7 @@
                 seront en aucun cas partagées ou commercialisées.
                 <br>Toute question relative à la récupération et conservation de vos données se doit d'être adressée à
                 <a href="mailto:antoine.montoya@edu.univ-eiffel.fr">Antoine Montoya</a>.
+                Pour la version détaillée des crédits : <a href="credits.html">Cliquez ici</a>
             </p>
         </div>
     </footer>
