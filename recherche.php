@@ -7,18 +7,9 @@
     <title>Krous Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="reserver.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
-
-<?php
-include("connexion.php");
-$requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
-$stmt = $db->query($requete);
-$resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-?>
-
 
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -26,11 +17,12 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
         <a href="index.php"><img class="logo-header" src="img/logo Krous.svg" alt="Accueil"></a>
         <div class="header-links">
 
-            <div class="searchbar-total"> <label for="searchbar">
+        <div class="searchbar-total"> <label for="searchbar">
                     <div class="searchbar-button"></div>
                 </label>
                 <input type="text" id="searchbar" placeholder="Rechercher...">
             </div>
+
             <a href="lieux.php">Catalogue</a>
             <a href="about.html">À propos</a>
             <a href="page.php">Page3</a>
@@ -38,49 +30,51 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
         </div>
     </header>
     <main id="contenu">
+    <form method="GET" action="recherche.php">
+    <div class="searchbar-total"> <label for="searchbar">
+                    <div class="searchbar-button"></div>
+                </label>
+                <input type="text" id="searchbar" placeholder="Rechercher...">
+                <input type="submit" value="Rechercher">
+            </div>
+    </form>
+<?php
+include("connexion.php");
 
-    <?php foreach ($resultat as $row){
-    echo "    <form action='avis.php' method='post'>
+if (isset($_GET['search'])) {
+    // Récupérer la valeur de la recherche
+    $search = $_GET['search'];
 
-    <input type='hidden' name='id_lieu' id='id_lieu' value='{$row["id_lieu"]}'>
-    <input type='hidden' name='prix' id='prix' value='{$row["prix"]}'>
+    try {
+        // Préparer la requête SQL pour récupérer les éléments correspondants à la recherche
+        $sql = "SELECT * FROM lieu WHERE nom LIKE :search";
+        $stmt = $db->prepare($sql);
 
-    <label for='prenom' >Prénom<span class='required'>*</span></label> 
-    <input type='text' name='prenom' id='prenom' maxlength='40' required>
-<br>
-    <label for='nom' >Nom<span class='required'>*</span></label>
-    <input type='text' name='nom' id='nom' maxlength='40' required>
-<br>
-    <label for='email' >E-mail<span class='required'>*</span></label>
-    <input type='email' name='email' id='email' maxlength='100' required>
-<br>
-    <label for='nombreplaces'>Pour combien de personnes réservez-vous ?<span class='required'>*</span></label>
-    <select name='nombreplaces' id='nombreplaces'>
-    <option value='1'>1</option>
-    <option value='2'>2</option>
-    <option value='3'>3</option>
-    <option value='4'>4</option>
-    <option value='5'>5</option>
-</select><br>
-    <label for='date'>Date de réservation<span class='required'>*</span></label>
-    <input type='datetime-local' name='date' id='date' required>
-<br>
-<input type='submit' value='Réserver'>
-<p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
-<br>
-</form>";} ?>
+        // Lier le paramètre de recherche avec des jokers pour la recherche partielle
+        $stmt->bindValue(':search', '%' . $search . '%');
 
+        // Exécuter la requête
+        $stmt->execute();
 
-
-
-<?php foreach ($resultat as $lieu) echo "<p type='hidden' name='{$lieu["id_lieu"]}'></p>" ?></p>
-    <p hidden id="prix"><?php foreach ($resultat as $lieu) echo "{$lieu["prix"]}" ?></p>
-    <p>Prix à payer TTC :  <span name='prixtotal' id="prixtotal"></span></p>
-
-
-
+        // Vérifier s'il y a des résultats
+        if ($stmt->rowCount() > 0) {
+            // Afficher les résultats
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "Nom: " . htmlspecialchars($row['nom']) . "<br>";
+                // Afficher d'autres informations si nécessaire
+            }
+        } else {
+            echo "Aucun résultat trouvé.";
+        }
+    } catch (PDOException $e) {
+        echo "Erreur: " . $e->getMessage();
+    } finally {
+        // Fermer la connexion à la base de données
+        $db = null;
+    }
+}
+?>
     </main>
-    
     <footer>
         <a href="#top" class="totop">RETOUR EN HAUT ↑</a>
         <div class="basPage invis">
@@ -100,7 +94,6 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
         </div>
     </footer>
     <script src="script.js"></script>
-    <script src="reserver.js"></script>
 </body>
 
 </html>

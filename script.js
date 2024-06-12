@@ -36,14 +36,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   
-// pour afficher dynamiquement le prix total en fonction du nombre de places
-  var nbplaces = document.getElementById("nombreplaces");
-  var prixtotal = document.getElementById("prixtotal");
-  var prix = document.getElementById("prix");
-  var nbplacesnombre = parseInt(nbplaces.value);
-  prixtotal.innerHTML = nbplacesnombre * prix.innerHTML + "€";
-  nbplaces.addEventListener("change", function () {
-    var nbplacesnombre = parseInt(nbplaces.value);
-    prixtotal.innerHTML = nbplacesnombre * prix.innerHTML + "€";
-  });
+
 });

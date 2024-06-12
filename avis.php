@@ -7,18 +7,10 @@
     <title>Krous Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="reserver.css">
+    <link rel="stylesheet" href="avis.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
-
-<?php
-include("connexion.php");
-$requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
-$stmt = $db->query($requete);
-$resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-?>
-
 
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -31,6 +23,7 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 </label>
                 <input type="text" id="searchbar" placeholder="Rechercher...">
             </div>
+
             <a href="lieux.php">Catalogue</a>
             <a href="about.html">À propos</a>
             <a href="page.php">Page3</a>
@@ -38,49 +31,44 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
         </div>
     </header>
     <main id="contenu">
+<?php
+    include("connexion.php");
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $email = $_POST['email'];
+    $nb_places = $_POST['nombreplaces'];
+    $date = $_POST['date'];
+    $prix_individuel = $_POST['prix'];
+    $id_lieu = $_POST['id_lieu'];
+    $prix = $prix_individuel * $nb_places;
 
-    <?php foreach ($resultat as $row){
-    echo "    <form action='avis.php' method='post'>
+        $requete="INSERT INTO reservation (date,nom,prenom,mail,prix,nb_places,id_lieu) VALUES ('$date','$nom','$prenom','$email','$prix','$nb_places','$id_lieu')";
+        $db->query($requete);
 
-    <input type='hidden' name='id_lieu' id='id_lieu' value='{$row["id_lieu"]}'>
-    <input type='hidden' name='prix' id='prix' value='{$row["prix"]}'>
+    // $message="Merci $prenom pour ta réservation chez Krous'Express ! Tu as réservé $nb_places billets pour $prix €. Nous te confirmons ta réservation pour le $date. À bientôt !";
+    // $to=$email;
+    // $subject="Votre réservation chez Krous'Express";
+    // mail($to, $subject, $message);
+?>
 
-    <label for='prenom' >Prénom<span class='required'>*</span></label> 
-    <input type='text' name='prenom' id='prenom' maxlength='40' required>
-<br>
-    <label for='nom' >Nom<span class='required'>*</span></label>
+<div><p>Votre commande a bien été enregistrée et un mail récapitulatif vous a été envoyé. <br> Souhaitez-vous laisser un commentaire ?</p>
+<a href="index.php">Non merci</a></div>
+
+<form action='add_comment.php' method='post'>
+    <label for='nom' >Pseudonyme ou nom à afficher<span class='required'>*</span></label> 
     <input type='text' name='nom' id='nom' maxlength='40' required>
 <br>
-    <label for='email' >E-mail<span class='required'>*</span></label>
-    <input type='email' name='email' id='email' maxlength='100' required>
+    <label for='pp' >Votre photo de profil</label> 
+    <input type='url' name='pp' placeholder='Vérifiez à bien mettre le lien vers une image' id='pp'>
 <br>
-    <label for='nombreplaces'>Pour combien de personnes réservez-vous ?<span class='required'>*</span></label>
-    <select name='nombreplaces' id='nombreplaces'>
-    <option value='1'>1</option>
-    <option value='2'>2</option>
-    <option value='3'>3</option>
-    <option value='4'>4</option>
-    <option value='5'>5</option>
-</select><br>
-    <label for='date'>Date de réservation<span class='required'>*</span></label>
-    <input type='datetime-local' name='date' id='date' required>
+    <label for='commentaire' >Votre commentaire<span class='required'>*</span></label>
+    <input type='textarea' name='commentaire' id='commentaire' maxlength='255' required>
 <br>
-<input type='submit' value='Réserver'>
+<input type='submit' value='Commenter'>
 <p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
-<br>
-</form>";} ?>
-
-
-
-
-<?php foreach ($resultat as $lieu) echo "<p type='hidden' name='{$lieu["id_lieu"]}'></p>" ?></p>
-    <p hidden id="prix"><?php foreach ($resultat as $lieu) echo "{$lieu["prix"]}" ?></p>
-    <p>Prix à payer TTC :  <span name='prixtotal' id="prixtotal"></span></p>
-
-
+</form>
 
     </main>
-    
     <footer>
         <a href="#top" class="totop">RETOUR EN HAUT ↑</a>
         <div class="basPage invis">
@@ -100,7 +88,6 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
         </div>
     </footer>
     <script src="script.js"></script>
-    <script src="reserver.js"></script>
 </body>
 
 </html>
