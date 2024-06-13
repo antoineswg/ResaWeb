@@ -13,6 +13,14 @@ try {
     $requete->bindParam(':commentaire', $commentaire);
     $requete->bindParam(':pp', $pp);
     $requete->execute();
+
+// Envoyer un email à l'administrateur
+$admin_email = "antoine.montoya@edu.univ-eiffel.fr";
+$admin_subject = "Nouveau commentaire";
+$admin_message = "$nom a laissé le commentaire suivant :\n\n $commentaire";
+$admin_headers = "From: krousexpress@resaweb.montoya.butmmi.o2switch.site";
+
+mail($admin_email, $admin_subject, $admin_message, $admin_headers);
     
     // Rediriger vers la page des commentaires
     header("Location: index.php#commentaires");

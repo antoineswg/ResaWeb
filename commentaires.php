@@ -27,7 +27,6 @@
     <title>Commentaires - Krous' Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="lieu.css">
     <link rel="stylesheet" href="commentaires.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -52,29 +51,32 @@
             $result = $db->query($query);
             if ($result) {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $pp=$row['pp'];
-                    $nom=$row['nom'];
-                    $commentaire=$row['commentaire'];
+                    $pp = $row['pp'];
+                    $nom = $row['nom'];
+                    $commentaire = $row['commentaire'];
                     if ($pp != null) {
                         echo "<div class='bloc-commentaire'>
                         <img src=". $pp." alt='photo de profil de l'utilisateur'>
-                        <p class='bloc-commentaire-nom'>".$nom."</p>
-                        <p class='bloc-commentaire-texte>".$commentaire."</p>
-                        </div>";
+                        <div class='commentaire-contenu'>
+                            <p class='bloc-commentaire-nom'>".$nom."</p>
+                            <p class='bloc-commentaire-texte'>".$commentaire."</p>
+                        </div>
+                        </div><br><br>";
                     } else {
                         echo "<div class='bloc-commentaire'>
                         <img src='img/pp.png' alt='photo de profil de l'utilisateur'>
-                        <p class='bloc-commentaire-nom'>".$nom."</p>
-                        <p class='bloc-commentaire-texte'>".$commentaire."</p>
-                        </div>";
+                        <div class='commentaire-contenu'>
+                            <p class='bloc-commentaire-nom'>".$nom."</p>
+                            <p class='bloc-commentaire-texte'>".$commentaire."</p>
+                        </div>
+                        </div><br><br>";
                     }
                 }
             } else {
                 echo "Erreur: " . $db->errorInfo()[2];
             }
             $db = null;
-            ?>
-
+        ?>
     </main>
 
     <footer>

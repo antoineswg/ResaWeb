@@ -60,52 +60,88 @@
     </header>
     <main id="contenu">
 
-    <?php
-    include("connexion.php");
-    $requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
-    $stmt = $db->query($requete);
-    $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-     foreach ($resultat as $row): ?>
-    <section>
-        <h1>Réservation pour la <?= $row["nom"] ?></h1>
-        <form action='ajout_reservation.php' method='post'>
-            <input type='hidden' name='id_lieu' id='id_lieu' value='<?= $row["id_lieu"] ?>'>
-            <input type='hidden' name='prix' id='prix' value='<?= $row["prix"] ?>'>
+<?php
+include("connexion.php");
+$requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
+$stmt = $db->query($requete);
+$resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
+foreach ($resultat as $row): ?>
+<section>
+    <h1>Réservation pour la <?= $row["nom"] ?></h1>
+    <form action='ajout_reservation.php' method='post' onsubmit="return validateDate()">
+        <input type='hidden' name='id_lieu' id='id_lieu' value='<?= $row["id_lieu"] ?>'>
+        <input type='hidden' name='prix' id='prix' value='<?= $row["prix"] ?>'>
 
-            <label for='prenom'>Prénom<span class='required'>*</span> <span class="precion">(40 caractères maximum)</span></label>
-            <input type='text' name='prenom' id='prenom' maxlength='40' required class='input-full-width'>
+        <label for='prenom'>Prénom<span class='required'>*</span> <span class="precion">(40 caractères maximum)</span></label>
+        <input type='text' name='prenom' id='prenom' maxlength='40' required class='input-full-width'>
 
-            <label for='nom'>Nom<span class='required'>*</span> <span class="precion">(40 caractères maximum)</span></label>
-            <input type='text' name='nom' id='nom' maxlength='40' required class='input-full-width'>
+        <label for='nom'>Nom<span class='required'>*</span> <span class="precion">(40 caractères maximum)</span></label>
+        <input type='text' name='nom' id='nom' maxlength='40' required class='input-full-width'>
 
-            <label for='email'>E-mail<span class='required'>*</span> <span class="precion">(100 caractères maximum)</span></label>
-            <input type='email' name='email' id='email' maxlength='100' required class='input-full-width'>
+        <label for='email'>E-mail<span class='required'>*</span> <span class="precion">(100 caractères maximum)</span></label>
+        <input type='email' name='email' id='email' maxlength='100' required class='input-full-width'>
 
-            <div class="input-row">
-                <div class="input-group">
-                    <label for='nombreplaces'>Pour combien de personnes réservez-vous ?<span class='required'>*</span></label>
-                    <select name='nombreplaces' id='nombreplaces' class='input-half-width'>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for='date'>Date de réservation<span class='required'>*</span></label>
-                    <input type='datetime-local' name='date' id='date' required class='input-half-width'>
-                </div>
+        <div class="input-row">
+            <div class="input-group">
+                <label for='nombreplaces'>Pour combien de personnes réservez-vous ?<span class='required'>*</span></label>
+                <select name='nombreplaces' id='nombreplaces' class='input-half-width' onchange="updateTotalPrice()">
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                </select>
             </div>
+            <div class="input-group">
+                <label for='date'>Date de réservation<span class='required'>*</span> <span class="precision">(entre 11h et 14h)</span></label>
+                <input type='datetime-local' name='date' id='date' required class='input-half-width'>
+            </div>
+        </div>
 
-            <p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
+        <div class="input-group">
+            <label>Prix à payer :</label>
+            <span id="totalPrice"><?= $row["prix"] ?> €</span>
+        </div>
 
-            <input type='submit' value='Réserver'>
-        </form>
-    </section>
+        <p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
+
+        <input type='submit' value='Réserver'>
+    </form>
+</section>
 <?php endforeach; ?>
 
-    </main>
+</main>
+
+<script>
+function validateDate() {
+    const dateInput = document.getElementById('date').value;
+    const selectedDate = new Date(dateInput);
+    const now = new Date();
+    const selectedHour = selectedDate.getHours();
+
+    // Vérifier si la date est dans le passé
+    if (selectedDate < now) {
+        alert("Vous ne pouvez pas réserver une date qui est déjà passée.");
+        return false;
+    }
+
+    // Vérifier si l'heure est entre 11h et 14h
+    if (selectedHour < 11 || selectedHour > 14) {
+        alert("Vous ne pouvez réserver qu'entre 11h et 14h.");
+        return false;
+    }
+
+    return true;
+}
+
+function updateTotalPrice() {
+    const prix = parseFloat(document.getElementById('prix').value);
+    const nombreplaces = parseInt(document.getElementById('nombreplaces').value);
+    const totalPrice = prix * nombreplaces;
+    document.getElementById('totalPrice').textContent = totalPrice + ' €';
+}
+</script>
+
     
     <footer>
         <div class="basPage invis">

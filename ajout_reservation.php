@@ -14,7 +14,19 @@ $id_lieu = filter_input(INPUT_POST, 'id_lieu', FILTER_SANITIZE_NUMBER_INT);
 $prix = $prix_individuel * $nb_places;
 
 try {
-    // Préparer et exécuter la requête SQL
+    // Récupérer le nom du lieu
+    $lieu_requete = $db->prepare("SELECT nom FROM lieu WHERE id_lieu = :id_lieu");
+    $lieu_requete->bindParam(':id_lieu', $id_lieu);
+    $lieu_requete->execute();
+    $lieu_result = $lieu_requete->fetch(PDO::FETCH_ASSOC);
+
+    if ($lieu_result) {
+        $lieu_nom = $lieu_result['nom'];
+    } else {
+        throw new Exception("Lieu non trouvé.");
+    }
+
+    // Préparer et exécuter la requête SQL pour insérer la réservation
     $requete = $db->prepare("INSERT INTO reservation (date, nom, prenom, mail, prix, nb_places, id_lieu) VALUES (:date, :nom, :prenom, :email, :prix, :nb_places, :id_lieu)");
     $requete->bindParam(':date', $date);
     $requete->bindParam(':nom', $nom);
@@ -24,31 +36,34 @@ try {
     $requete->bindParam(':nb_places', $nb_places);
     $requete->bindParam(':id_lieu', $id_lieu);
     $requete->execute();
+
+    // Convertir la date au format DD/MM/YYYY à HH:MM
+    $datetime = new DateTime($date);
+    $formatted_date = $datetime->format('d/m/Y \à H:i');
+
+    // Envoyer un email à l'administrateur
+    $admin_email = "antoine.montoya@edu.univ-eiffel.fr";
+    $admin_subject = "Nouvelle réservation";
+    $admin_message = "$prenom $nom a réservé $nb_places places pour le $formatted_date à la $lieu_nom (site n°$id_lieu) pour un total de $prix.";
+    $admin_headers = "From: krousexpress@resaweb.montoya.butmmi.o2switch.site";
+
+    mail($admin_email, $admin_subject, $admin_message, $admin_headers);
+
+    // Envoyer un email de confirmation au client
+    $client_subject = "Confirmation de votre réservation";
+    $client_message = "Merci $prenom pour ta réservation de $nb_places places prévue au $formatted_date à la $lieu_nom.\nLe prix total de ta commande est de $prix €.\n\nÀ bientôt !";
+    $client_headers = "From: krousexpress@resaweb.montoya.butmmi.o2switch.site";
+
+    mail($email, $client_subject, $client_message, $client_headers);
+
+    // Rediriger vers la page de confirmation
+    header("Location: confirmation.html");
     exit;
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
     exit;
+} catch (Exception $e) {
+    echo "Erreur : " . $e->getMessage();
+    exit;
 }
-
-
-        $subject="Réservation chez Krous' Express";
-
-        $message="Merci $prenom pour ta réservation prévue au $date.
-        Nombre de places : $nb_places.
-        Total : $prix €";
-                 
-        $to=$email;
-
-        $messageantoine="$prenom $nom a réservé $nb_places places pour le $date au site n°$id_lieu pour un total de $prix."
-
-        $mailantoine="antoine.montoya@edu.univ-eiffel.fr";
-
-        $subject2="Réservation Krous' Express";
-
-        mail($to, $subject, $message);
-
-        mail($mailantoine, $subject2, $messageantoine);
-
-        // Rediriger vers la page de confirmation
-        header("Location: confirmation.html");
 ?>
