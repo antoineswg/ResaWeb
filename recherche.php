@@ -52,7 +52,7 @@
             <div class="tri">
                 <br>
             <label class="titre-categorie" for="tri">Trier par :</label>
-            <select name="tri" id="tri">
+            <select name="tri" id="tri" class="input-tri">
                 <option value="nom">Nom</option>
                 <option value="prix">Prix</option>
             </select>

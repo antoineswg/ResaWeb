@@ -35,34 +35,35 @@ h2{
     margin-top: 100px;
 }
 
-.grid-lieux{
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 4%;
+.grid-lieux {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4%;
 }
 
-.grid-lieux-item{
-	border: solid 5px var(--main-color);
-	padding: 20px;
-	border-radius: 20px;
-	background-color: var(--soft-gray);
-	position: relative;
+.grid-lieux-item {
+    border: solid 5px var(--main-color);
+    padding: 20px;
+    border-radius: 20px;
+    background-color: var(--soft-gray);
+    position: relative;
+	min-width: 315px;
 }
 
-.grid-lieux-item img{
-	width: 100%;
-	border-radius: 10px;
-	margin: auto;
+.grid-lieux-item img {
+    width: 100%;
+    border-radius: 10px;
+    margin: auto;
 }
 
-.grid-lieux-item p{
-	margin-bottom: 2rem;
+.grid-lieux-item p {
+    margin-bottom: 2rem;
 }
 
-.grid-lieux-item a{
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
+.grid-lieux-item a {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 .commentaires-header {
@@ -73,33 +74,33 @@ h2{
 }
 
 .commentaires-header a {
-	margin-top: 80px;
+    margin-top: 80px;
 }
 
-.grid-commentaires{
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 2%;
+.grid-commentaires {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2%;
 }
 
-.grid-commentaires-item{
-	border: solid 5px var(--main-color);
-	padding: 20px;
-	border-radius: 20px;
-	background-color: var(--soft-gray);
-	position: relative;
+.grid-commentaires-item {
+    border: solid 5px var(--main-color);
+    padding: 20px;
+    border-radius: 20px;
+    background-color: var(--soft-gray);
+    position: relative;
 }
 
-.grid-commentaires-item img{
-	height: 80px;
-	width: 80px;
-	object-fit: cover;
-	float: left;
-	border-radius: 40px;
+.grid-commentaires-item img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    float: left;
+    border-radius: 40px;
 }
 
-.grid-commentaires-item-nom{
-	margin-left: 90px;
-	font-size: 1.5rem;
-	font-weight: bold;
+.grid-commentaires-item-nom {
+    margin-left: 90px;
+    font-size: 1.5rem;
+    font-weight: bold;
 }

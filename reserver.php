@@ -12,14 +12,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
-<?php
-include("connexion.php");
-$requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
-$stmt = $db->query($requete);
-$resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-?>
-
-
 <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header name="top">
@@ -33,40 +25,51 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
     </header>
     <main id="contenu">
 
-    <?php foreach ($resultat as $row){
-    echo "<section>
-    <form action='ajout_reservation.php' method='post'>
+    <?php
+    include("connexion.php");
+    $requete = "SELECT * FROM lieu WHERE id_lieu = " . $_GET["id"];
+    $stmt = $db->query($requete);
+    $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
+     foreach ($resultat as $row): ?>
+    <section>
+        <h1>Réservation pour la <?= $row["nom"] ?></h1>
+        <form action='ajout_reservation.php' method='post'>
+            <input type='hidden' name='id_lieu' id='id_lieu' value='<?= $row["id_lieu"] ?>'>
+            <input type='hidden' name='prix' id='prix' value='<?= $row["prix"] ?>'>
 
-    <input type='hidden' name='id_lieu' id='id_lieu' value='{$row["id_lieu"]}'>
-    <input type='hidden' name='prix' id='prix' value='{$row["prix"]}'>
+            <label for='prenom'>Prénom<span class='required'>*</span></label>
+            <input type='text' name='prenom' id='prenom' maxlength='40' required class='input-full-width'>
 
-    <label for='prenom' >Prénom<span class='required'>*</span></label> 
-    <input type='text' name='prenom' id='prenom' maxlength='40' required>
-<br>
-    <label for='nom' >Nom<span class='required'>*</span></label>
-    <input type='text' name='nom' id='nom' maxlength='40' required>
-<br>
-    <label for='email' >E-mail<span class='required'>*</span></label>
-    <input type='email' name='email' id='email' maxlength='100' required>
-<br>
-    <label for='nombreplaces'>Pour combien de personnes réservez-vous ?<span class='required'>*</span></label>
-    <select name='nombreplaces' id='nombreplaces'>
-    <option value='1'>1</option>
-    <option value='2'>2</option>
-    <option value='3'>3</option>
-    <option value='4'>4</option>
-    <option value='5'>5</option>
-</select><br>
-    <label for='date'>Date de réservation<span class='required'>*</span></label>
-    <input type='datetime-local' name='date' id='date' required>
-    <p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
+            <label for='nom'>Nom<span class='required'>*</span></label>
+            <input type='text' name='nom' id='nom' maxlength='40' required class='input-full-width'>
 
-<br>
-<input type='submit' value='Réserver'>
-<br>
-    <p>Prix à payer TTC :  <span name='prixtotal' id='prixtotal'> </span></p>
-</form>
-    </section>";} ?>
+            <label for='email'>E-mail<span class='required'>*</span></label>
+            <input type='email' name='email' id='email' maxlength='100' required class='input-full-width'>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label for='nombreplaces'>Pour combien de personnes réservez-vous ?<span class='required'>*</span></label>
+                    <select name='nombreplaces' id='nombreplaces' class='input-half-width'>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for='date'>Date de réservation<span class='required'>*</span></label>
+                    <input type='datetime-local' name='date' id='date' required class='input-half-width'>
+                </div>
+            </div>
+
+            <p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
+
+            <input type='submit' value='Réserver'>
+        </form>
+    </section>
+<?php endforeach; ?>
+
     </main>
     
     <footer>
@@ -91,7 +94,6 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
         </div>
     </footer>
     <script src="script.js"></script>
-    <script src="reserver.js"></script>
 </body>
 
 </html>
