@@ -34,7 +34,8 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
     <main id="contenu">
 
     <?php foreach ($resultat as $row){
-    echo "    <form action='ajout_reservation.php' method='post'>
+    echo "<section>
+    <form action='ajout_reservation.php' method='post'>
 
     <input type='hidden' name='id_lieu' id='id_lieu' value='{$row["id_lieu"]}'>
     <input type='hidden' name='prix' id='prix' value='{$row["prix"]}'>
@@ -58,21 +59,14 @@ $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
 </select><br>
     <label for='date'>Date de réservation<span class='required'>*</span></label>
     <input type='datetime-local' name='date' id='date' required>
+    <p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
+
 <br>
 <input type='submit' value='Réserver'>
-<p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
 <br>
-</form>";} ?>
-
-
-
-
-<?php foreach ($resultat as $lieu) echo "<p type='hidden' name='{$lieu["id_lieu"]}'></p>" ?></p>
-    <p hidden id="prix"><?php foreach ($resultat as $lieu) echo "{$lieu["prix"]}" ?></p>
-    <p>Prix à payer TTC :  <span name='prixtotal' id="prixtotal"></span></p>
-
-
-
+    <p>Prix à payer TTC :  <span name='prixtotal' id='prixtotal'> </span></p>
+</form>
+    </section>";} ?>
     </main>
     
     <footer>

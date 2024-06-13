@@ -37,10 +37,10 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            $nom = htmlspecialchars($result['nom']);
-            $desc = htmlspecialchars($result['desc']);
-            $prix = htmlspecialchars($result['prix']);
-            $image = htmlspecialchars($result['image']);
+            $nom = $result['nom'];
+            $desc = $result['desc'];
+            $prix = $result['prix'];
+            $image = $result['image'];
 
             echo "<div class='card'>
                     <img src='". $image ."' alt='Image de ". $nom ."'>

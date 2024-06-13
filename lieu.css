@@ -26,6 +26,7 @@ main a:hover{
     border: solid 5px var(--main-color);
     border-radius: 50px;
     position: relative;
+	background-color: var(--soft-gray);
 }
 
 .card img{

@@ -1,0 +1,27 @@
+.bloc-commentaire{
+	border: solid 5px var(--main-color);
+	padding: 20px;
+	border-radius: 20px;
+	background-color: var(--soft-gray);
+}
+
+.bloc-commentaire img{
+	height: 200px;
+	width: 200px;
+	object-fit: cover;
+	float: left;
+	border-radius: 200px;
+}
+
+.bloc-commentaire-nom{
+	margin-left: 210px;
+	font-size: 1.5rem;
+	font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.bloc-commentaire-texte{
+    margin-left: 210px;
+    margin-bottom: 110px;
+}

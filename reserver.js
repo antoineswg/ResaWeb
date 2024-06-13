@@ -1,10 +1,12 @@
+document.addEventListener("DOMContentLoaded", function () {
 // pour afficher dynamiquement le prix total en fonction du nombre de places
-var nbplaces = document.getElementById("nombreplaces");
-var afficheprixtotal = document.getElementById("prixtotal");
-var prix = document.getElementById("prix");
-var nbplacesnombre = parseInt(nbplaces.value);
-afficheprixtotal.innerHTML = nbplacesnombre * prix.innerHTML + "€";
-nbplaces.addEventListener("change", function () {
-var nbplacesnombre = parseInt(nbplaces.value);
-afficheprixtotal.innerHTML = nbplacesnombre * prix.innerHTML + "€";
+var nombrePlaces = document.querySelector("#nombreplaces").value;
+var prix = document.querySelector("#prix").value;
+var prixTotal= document.querySelector("#prixtotal");
+
+nombrePlacesInput.addEventListener("change", function() {
+    var prixTotal = nombrePlaces * prix;
+    prixTotal.innerHTLM = prixTotal;
+});
+
 });

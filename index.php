@@ -84,7 +84,7 @@
             
         </section>
         
-        <section class="testimonials">
+        <section id="commentaires">
             <div class="commentaires-header">
             <h2>Les derniers commentaires</h2>
             <a href="commentaires.php">Accéder à l'ensemble des commentaires</a>

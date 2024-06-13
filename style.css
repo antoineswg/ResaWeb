@@ -121,6 +121,7 @@ header {
 	font-weight: bold;
 	position: relative;
 	margin-bottom: 2rem;
+	min-width: 1033px;
 }
 
 .logo-header {
@@ -204,5 +205,5 @@ footer a {
 }
 
 .vis {
-	height: 20rem;
+	height: 25rem;
 }

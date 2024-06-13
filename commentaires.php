@@ -8,6 +8,7 @@
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lieu.css">
+    <link rel="stylesheet" href="commentaires.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
@@ -24,37 +25,35 @@
         </div>
     </header>
     <main id="contenu">
-        <h1>Où réserver ?</h1>
-
+        <h1>Commentaires</h1>
         <?php
-        include("connexion.php");
-        $requete = "SELECT * FROM lieu";
-        $stmt = $db->query($requete);
-        
-            $result = $stmt->fetchall(PDO::FETCH_ASSOC);
-                foreach ($result as $row){
-                    $nom = $row['nom'];
-                    $desc = $row['desc'];
-                    $prix = $row['prix'];
-                    $image = $row['image'];
-                    $id_lieu = $row['id_lieu'];
-        
-                    echo "<div class='card'>
-                            <img src='". $image ."' alt='Image de ". $nom ."'>
-                            <div class='card-text'>
-                                <h1>". $nom ."</h1>
-                                <p>". $desc ."</p>
-                                <p>Prix : ". $prix ."€</p>
-                                <a href='reserver.php?id=". $id_lieu ."'>Réserver</a>
-                            </div>
+            include("connexion.php");
+            $query = "SELECT * FROM commentaire";
+            $result = $db->query($query);
+            if ($result) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $pp=$row['pp'];
+                    $nom=$row['nom'];
+                    $commentaire=$row['commentaire'];
+                    if ($pp != null) {
+                        echo "<div class='bloc-commentaire'>
+                        <img src=". $pp. ">
+                        <p class='bloc-commentaire-nom'>".$nom."</p>
+                        <p class='bloc-commentaire-texte>".$commentaire."</p>
                         </div>";
-        
+                    } else {
+                        echo "<div class='bloc-commentaire'>
+                        <img src='img/pp.png'>
+                        <p class='bloc-commentaire-nom'>".$nom."</p>
+                        <p class='bloc-commentaire-texte'>".$commentaire."</p>
+                        </div>";
+                    }
                 }
-        
-                if (count($result) === 0) {
-                    header("Location:404.html");
-                }
-                ?>
+            } else {
+                echo "Erreur: " . $db->errorInfo()[2];
+            }
+            $db = null;
+            ?>
 
     </main>
 

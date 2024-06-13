@@ -7,6 +7,7 @@
     <title>Krous Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="avis.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
@@ -23,10 +24,10 @@
         </div>
     </header>
     <main id="contenu">
-        <div><p>Votre commande a bien été enregistrée et un mail récapitulatif vous a été envoyé. <br> Souhaitez-vous laisser un commentaire ?</p>
-<a href="index.php">Non merci</a></div>
 
-<form action='ajout_commentaire.php' method='post'>
+        <section>
+        <h1>Laissez nous votre avis sur notre service !</h1>
+            <form action='ajout_commentaire.php' method='post'>
     <label for='nom' >Pseudonyme ou nom à afficher<span class='required'>*</span></label> 
     <input type='text' name='nom' id='nom' maxlength='40' required>
 <br>
@@ -34,14 +35,15 @@
     <input type='url' name='pp' placeholder='Vérifiez à bien mettre le lien vers une image' id='pp'>
 <br>
     <label for='commentaire' >Votre commentaire<span class='required'>*</span></label>
-    <input type='textarea' name='commentaire' id='commentaire' maxlength='255' required>
+    <input type='text' name='commentaire' id='commentaire' maxlength='255' required>
 <br>
-<input type='submit' value='Commenter'>
-<p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
-</form>
 
-</main>
-<footer>
+<p>Les symboles <span class='required'>*</span> indiquent un champ obligatoire</p>
+<input type='submit' value='Commenter'>
+</form>
+        </section>
+    </main>
+    <footer>
         <div class="basPage invis">
             <div class="footer-header">            
             <h2 class="ML">Mentions légales</h2>
