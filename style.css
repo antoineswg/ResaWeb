@@ -87,6 +87,7 @@ a{
 main{
 	width: 60%;
 	margin: 0 auto;
+	min-height: 70vh;
 }
 
 h1{
@@ -100,10 +101,6 @@ h3{
 }
 p{
     font-size: 1.2rem;
-}
-
-main{
-    min-height: 70vh;
 }
 
 

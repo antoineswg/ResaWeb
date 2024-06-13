@@ -51,34 +51,36 @@
         </section>
 
         <section>
-            <h2>La roulette</h2>
-            <p>Vous ne savez pas où réserver ? Laissez-vous guider par la roulette ! Le hasard a choisi deux lieux pour vous, plus qu'à choisir lequel sera le final.</p>
+            <h2>Nos derniers ajouts</h2>
             <div class="grid-lieux">
-            <?php
+        <?php
             include("connexion.php");
-            $requete = "SELECT * FROM lieu ORDER BY RAND() LIMIT 2";
+
+            // Requête pour obtenir les deux derniers lieux ajoutés
+            $requete = "SELECT * FROM lieu ORDER BY id_lieu DESC LIMIT 2";
             $stmt = $db->query($requete);
-            $result = $stmt->fetchall(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
             foreach ($result as $row) {
                 $id_lieu = $row['id_lieu'];
                 $nom = $row['nom'];
                 $image = $row['image'];
                 $description = $row['desc'];
-                $nom = $row['nom'];
                 $prix = $row['prix'];
                 echo "<div class='grid-lieux-item'>
-                    <img src=". $image." alt ='image illustrative de la ". $nom ."'>
-                    <h3>".$nom."</h3>
-                    <p>".$description."</p>
-                    <a href='lieu.php?id=".$id_lieu."'>Accéder à sa page</a>
+                <img src='". $image."' alt='image illustrative de la ". $nom ."'>
+                <h3>".$nom."</h3>
+                <p>".$description."</p>
+                <a href='lieu.php?id=".$id_lieu."'>Accéder à sa page</a>
                 </div>";
             }
+
             if (count($result) === 0) {
                 echo "<div class='grid-item'>
-                    <p>Aucun lieu trouvé</p>
-                    </div>";
+                <p>Aucun lieu trouvé</p>
+                </div>";
             }
-            ?>
+        ?>
             </div>
 
             

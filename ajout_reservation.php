@@ -24,12 +24,31 @@ try {
     $requete->bindParam(':nb_places', $nb_places);
     $requete->bindParam(':id_lieu', $id_lieu);
     $requete->execute();
-    
-    // Rediriger vers la page de confirmation
-    header("Location: confirmation.html");
     exit;
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
     exit;
 }
+
+
+        $subject="Réservation chez Krous' Express";
+
+        $message="Merci $prenom pour ta réservation prévue au $date.
+        Nombre de places : $nb_places.
+        Total : $prix €";
+                 
+        $to=$email;
+
+        $messageantoine="$prenom $nom a réservé $nb_places places pour le $date au site n°$id_lieu pour un total de $prix."
+
+        $mailantoine="antoine.montoya@edu.univ-eiffel.fr";
+
+        $subject2="Réservation Krous' Express";
+
+        mail($to, $subject, $message);
+
+        mail($mailantoine, $subject2, $messageantoine);
+
+        // Rediriger vers la page de confirmation
+        header("Location: confirmation.html");
 ?>

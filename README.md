@@ -12,3 +12,5 @@ Installer le site en local :
    6/ Aller dans le fichier " connexion.php " et modifier les identifiants
    7/ Vérifier que la base de données est bien liée
 Lien local : http://localhost/resaweb/
+
+Lien pour consulter les règles OPQuast : https://docs.google.com/spreadsheets/d/10YeCOR49vZPWLRMCgLbid1AOi2kVjyLHPFmjlNnAlNE/edit?usp=sharing
