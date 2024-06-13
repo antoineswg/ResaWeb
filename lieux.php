@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krous Express</title>
+    <title>Catalogue - Krous' Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lieu.css">
@@ -40,7 +40,7 @@
                     $id_lieu = $row['id_lieu'];
         
                     echo "<div class='card'>
-                            <img src='". $image ."' alt='Image de ". $nom ."'>
+                            <img src='". $image ."' alt='Image de la ". $nom ."'>
                             <div class='card-text'>
                                 <h1>". $nom ."</h1>
                                 <p>". $desc ."</p>

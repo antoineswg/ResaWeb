@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krous Express</title>
+    <title>Avis - Krous' Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="avis.css">
@@ -28,13 +28,13 @@
         <section>
         <h1>Laissez nous votre avis sur notre service !</h1>
             <form action='ajout_commentaire.php' method='post'>
-    <label for='nom' >Pseudonyme ou nom à afficher<span class='required'>*</span></label> 
+    <label for='nom' >Pseudonyme ou nom à afficher<span class='required'>*</span> <span class="precion">(40 caractères maximum)</span></label> 
     <input type='text' name='nom' id='nom' maxlength='40' required>
 <br>
-    <label for='pp' >Votre photo de profil</label> 
+    <label for='pp' >Votre photo de profil </label> 
     <input type='url' name='pp' placeholder='Vérifiez à bien mettre le lien vers une image' id='pp'>
 <br>
-    <label for='commentaire' >Votre commentaire<span class='required'>*</span></label>
+    <label for='commentaire' >Votre commentaire<span class='required'>*</span> <span class="precion">(255 caractères maximum)</span></label>
     <input type='text' name='commentaire' id='commentaire' maxlength='255' required>
 <br>
 

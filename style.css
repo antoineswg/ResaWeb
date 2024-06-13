@@ -72,7 +72,7 @@ a.evitement:focus {
 body {
 	margin: 0px;
 	background-color: var(--white);
-	font-family: 'Marianne';
+	font-family: 'Marianne','arial';
 	min-width: 768px;
 }
 

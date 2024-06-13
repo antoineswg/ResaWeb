@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krous Express</title>
+    <title>Accueil - Krous' Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href='index.css'>
@@ -67,7 +67,7 @@
                 $nom = $row['nom'];
                 $prix = $row['prix'];
                 echo "<div class='grid-lieux-item'>
-                    <img src=". $image. ">
+                    <img src=". $image." alt ='image illustrative de la ". $nom ."'>
                     <h3>".$nom."</h3>
                     <p>".$description."</p>
                     <a href='lieu.php?id=".$id_lieu."'>Accéder à sa page</a>
@@ -107,13 +107,13 @@
                     $commentaire=$row['commentaire'];
                     if ($pp != null) {
                         echo "<div class='grid-commentaires-item'>
-                        <img src=". $pp. ">
+                        <img src=". $pp. " alt='photo de profil de l'utilisateur'>
                         <p class='grid-commentaires-item-nom'>".$nom."</p>
                         <p>".$commentaire."</p>
                         </div>";
                     } else {
                         echo "<div class='grid-commentaires-item'>
-                        <img src='img/pp.png'>
+                        <img src='img/pp.png' alt='photo de profil de l'utilisateur'>
                         <p class='grid-commentaires-item-nom'>".$nom."</p>
                         <p>".$commentaire."</p>
                         </div>";

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krous Express</title>
+    <title>Réservation - Krous' Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="reserver.css">
@@ -37,13 +37,13 @@
             <input type='hidden' name='id_lieu' id='id_lieu' value='<?= $row["id_lieu"] ?>'>
             <input type='hidden' name='prix' id='prix' value='<?= $row["prix"] ?>'>
 
-            <label for='prenom'>Prénom<span class='required'>*</span></label>
+            <label for='prenom'>Prénom<span class='required'>*</span> <span class="precion">(40 caractères maximum)</span></label>
             <input type='text' name='prenom' id='prenom' maxlength='40' required class='input-full-width'>
 
-            <label for='nom'>Nom<span class='required'>*</span></label>
+            <label for='nom'>Nom<span class='required'>*</span> <span class="precion">(40 caractères maximum)</span></label>
             <input type='text' name='nom' id='nom' maxlength='40' required class='input-full-width'>
 
-            <label for='email'>E-mail<span class='required'>*</span></label>
+            <label for='email'>E-mail<span class='required'>*</span> <span class="precion">(100 caractères maximum)</span></label>
             <input type='email' name='email' id='email' maxlength='100' required class='input-full-width'>
 
             <div class="input-row">

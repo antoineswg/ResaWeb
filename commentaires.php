@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krous Express</title>
+    <title>Commentaires - Krous' Express</title>
     <link rel="icon" href="img/logo Krous.svg" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lieu.css">
@@ -37,13 +37,13 @@
                     $commentaire=$row['commentaire'];
                     if ($pp != null) {
                         echo "<div class='bloc-commentaire'>
-                        <img src=". $pp. ">
+                        <img src=". $pp." alt='photo de profil de l'utilisateur'>
                         <p class='bloc-commentaire-nom'>".$nom."</p>
                         <p class='bloc-commentaire-texte>".$commentaire."</p>
                         </div>";
                     } else {
                         echo "<div class='bloc-commentaire'>
-                        <img src='img/pp.png'>
+                        <img src='img/pp.png' alt='photo de profil de l'utilisateur'>
                         <p class='bloc-commentaire-nom'>".$nom."</p>
                         <p class='bloc-commentaire-texte'>".$commentaire."</p>
                         </div>";
